@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import MagicMock
 
-from hooks import Hookable, CreateHook
+from pytapable import Hookable, CreateHook
 
 HOOK_MOVE = 'move_hook_name'
 TAP_NAME = 'my_tap'
