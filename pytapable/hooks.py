@@ -1,6 +1,11 @@
 from typing import List
 import uuid
 from functools import wraps, partial
+from collections import namedtuple
+
+from .intercept_base import HookInterceptor
+
+HookConfig = namedtuple('HookConfig', ['name', 'interceptor'])
 
 
 class Tap(object):
@@ -12,22 +17,24 @@ class Tap(object):
 
 
 class Hook(object):
-    def __init__(self):
+    def __init__(self, interceptor: HookInterceptor = None):
         self.taps = []  # type: List[Tap]
-        self.interceptor = None
+        self.interceptor = interceptor
 
     def tap(self, name, fn, before=True, after=True):
-        self.taps.append(Tap(
+        tap = Tap(
             name=name,
             fn=fn,
             before=before,
             after=after
-        ))
+        )
+        tap = self.interceptor.register(tap) if self.interceptor else tap
+        self.taps.append(tap)
 
     def __call__(self, *args, **kwargs):
         self.tap(*args, **kwargs)
 
-    def call(self, fn_args, is_before, fn_output=None):
+    def call_taps(self, fn_args, is_before, fn_output=None):
         for tap in self.taps:
             if (tap.before and is_before) or (tap.after and not is_before):
                 tap.fn(
@@ -49,33 +56,35 @@ class Hookable(object):
         self.hooks = {}
         klass = type(self)
         for method in map(partial(getattr, klass), dir(klass)):
-            if hasattr(method, '__hooked'):
-                name = getattr(method, '__hooked')
-                self.hooks[name] = Hook()
+            if hasattr(method, '_pytapable'):
+                hook_config = getattr(method, '_pytapable')
+                self.hooks[hook_config.name] = Hook(interceptor=hook_config.interceptor)
 
     def inherit_hooks(self, hookable_instance):
         self.hooks.update(hookable_instance.hooks)
 
 
 class CreateHook(object):
-    def __init__(self, name=None):
+    def __init__(self, name=None, interceptor=None):
         self.name = name
+        self.interceptor = interceptor
 
     def __call__(self, fn):
         @wraps(fn)
         def wrapper(*args, **kwargs):
-            tap = args[0].hooks[self.name]
+            hook = args[0].hooks[self.name]
             fn_args = {"args": args, "kwargs": kwargs}
 
-            tap.call(fn_args=fn_args, fn_output=None, is_before=True)
+            hook.call_taps(fn_args=fn_args, fn_output=None, is_before=True)
 
             out = fn(*args, **kwargs)
 
-            tap.call(fn_args=fn_args, fn_output=out, is_before=False)
+            hook.call_taps(fn_args=fn_args, fn_output=out, is_before=False)
 
             return out
 
-        setattr(wrapper, '__hooked', self.name)
+        hook_config = HookConfig(name=self.name, interceptor=self.interceptor)
+        wrapper._pytapable = hook_config
         return wrapper
 
     def get_name(self):
