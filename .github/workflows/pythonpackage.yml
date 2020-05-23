@@ -40,4 +40,4 @@ jobs:
         ls -lah
     - name: Test with pytest
       run: |
-        pytest
+        pytest tests/
