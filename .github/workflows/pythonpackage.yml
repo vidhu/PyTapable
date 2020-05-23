@@ -16,6 +16,8 @@ jobs:
     strategy:
       matrix:
         python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
+    env:
+      - PYTHONPATH: '.'
 
     steps:
     - uses: actions/checkout@v2
