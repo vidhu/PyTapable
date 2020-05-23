@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="PyTapable",
-    version="0.0.1",
+    version="0.0.2",
     author="Vidhu Bhatnagar",
     author_email="vidhu1911@gmail.com",
     description="Provides utilities to implement a hookable interface",

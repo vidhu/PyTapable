@@ -9,6 +9,6 @@ class Hook(BaseHook):
         tap = self.interceptor.register(tap) if self.interceptor else tap
         self.taps.append(tap)
 
-    def call_taps(self, *args, **kwargs):
+    def call(self, *args, **kwargs):
         for tap in self.taps:
             tap.fn(*args, **kwargs)

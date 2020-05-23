@@ -29,7 +29,7 @@ class BaseHook(object):
     def tap(self, *args, **kwargs):
         pass
 
-    def call_taps(self, *args, **kwargs):
+    def call(self, *args, **kwargs):
         pass
 
     def intercept(self, interceptor):
