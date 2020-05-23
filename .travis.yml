@@ -1,4 +1,6 @@
 language: python
+env:
+  - PYTHONPATH="."
 python:
   - "3.7"
 script:
