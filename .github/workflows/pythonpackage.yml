@@ -40,3 +40,13 @@ jobs:
     - name: Test with pytest
       run: |
         pytest tests/
+    - name: Check Coverage Over 90%
+      run: |
+        coverage report --fail-under=90
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        token: ${{ secrets.CODECOV_TOKEN  }}
+        file: .coverage.xml
+        flags: pytests
+        env_vars: OS,PYTHON
