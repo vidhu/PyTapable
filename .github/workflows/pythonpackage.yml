@@ -9,9 +9,10 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  PYTHONPATH: '.'
+
 jobs:
-  env:
-    PYTHONPATH: '.'
   build:
 
     runs-on: ubuntu-latest
