@@ -31,6 +31,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r test_requirements.txt
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+        if [ -f test_requirements.txt ]; then pip install -r test_requirements.txt; fi
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
@@ -39,11 +40,11 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest tests/
+        pytest --cov=tests/
     - name: Check Coverage Over 90%
       run: |
         ls -lah
-        coverage report --fail-under=90
+
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
