@@ -11,7 +11,7 @@ on:
 
 jobs:
   env:
-    - PYTHONPATH: '.'
+    PYTHONPATH: '.'
   build:
 
     runs-on: ubuntu-latest
