@@ -22,14 +22,14 @@ class BaseHook(object):
         INLINE: 'Inline'
     }
 
-    def __init__(self, interceptor: HookInterceptor = None):
+    def __init__(self, interceptor=None):
         self.taps = []
         self.interceptor = interceptor
 
     def tap(self, *args, **kwargs):
         pass
 
-    def call_taps(self, *args, **kwargs):
+    def call(self, *args, **kwargs):
         pass
 
     def intercept(self, interceptor):

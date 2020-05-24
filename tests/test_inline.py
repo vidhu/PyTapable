@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import MagicMock
+from .common_mock import MagicMock
 
 from pytapable import Hook
 
@@ -34,7 +34,7 @@ class TestInlineHooks(TestCase):
 
         # Trigger
         kwargs = {'primitive': 'hi', 'complex': {'a': 1}}
-        my_hook.call_taps(**kwargs)
+        my_hook.call(**kwargs)
 
         callback.assert_called_once_with(**kwargs)
 

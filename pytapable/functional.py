@@ -22,7 +22,7 @@ class FunctionalBaseHook(BaseHook):
         tap = self.interceptor.register(tap) if self.interceptor else tap
         self.taps.append(tap)
 
-    def call_taps(self, fn_args, is_before, fn_output=None):
+    def call(self, fn_args, is_before, fn_output=None):
         for tap in self.taps:
             if (tap.before and is_before) or (tap.after and not is_before):
                 tap.fn(
@@ -64,11 +64,11 @@ class CreateHook(object):
             hook = args[0].hooks[self.name]
             fn_args = {"args": args, "kwargs": kwargs}
 
-            hook.call_taps(fn_args=fn_args, fn_output=None, is_before=True)
+            hook.call(fn_args=fn_args, fn_output=None, is_before=True)
 
             out = fn(*args, **kwargs)
 
-            hook.call_taps(fn_args=fn_args, fn_output=out, is_before=False)
+            hook.call(fn_args=fn_args, fn_output=out, is_before=False)
 
             return out
 
