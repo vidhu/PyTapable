@@ -24,3 +24,80 @@ A Library to Implement Hookable Interfaces
   </a>
 </p>
 
+## Table of Contents
+
+## About The Project
+PyTapable  provides a set of utility to help you implement hookable interfaces in your classes. This opens up the
+posibility for solving a number of usecases such as
+
+ - Providing plugable interfaces for your libraries and frameworks
+ - Code seperation by functional and service domains
+
+## Getting Started
+This project can be used in python 2.7, 3.5 and greater
+
+```bash
+$ pip install pytapable
+```
+
+### Example
+#### Inline hooks
+We first create our hook called `my_hook`
+```python
+from pytapable import Hook
+
+my_hook = Hook()
+```
+
+As a consumer, we can tap into this hook by passing a name for our tap and a callback function
+```python
+def my_callback(context, greeting):
+    print(f"Hook says: {greeting}")
+    
+my_hook.tap('My Tap Name', callable)
+```
+Our callback is executed when the `hook.call(...)` is executed. The callback receives whatever args were passed in the
+`hook.call` method in addition to a context `dict`
+```python
+my_hook.call(greeting="Hi Callback")
+```
+
+#### Functional Hooks
+Functional hooks are different from inline hooks in that the callback args are predefined.
+```python
+from pytapable import CreateHook, HookableMixin, create_hook_name
+class Car(HookableMixin):
+    HOOK_ON_MOVE = create_hook_name('on_move')
+    
+    @CreateHook(name=HOOK_ON_MOVE)
+    def move(self, speed=10):
+        return f"Moving at {speed}Mph"
+```
+ - Start adding the `HookableMixin` to the Car Class. This is necessary to install hooks on class methods.
+ - Decorate the `Car.move` method using the `@CreateHook` decorator. In the decorator, give it a name. As best practice 
+ we define the name as a Class Constant so consumers can easily refer to it.
+ - The value of the hook can be anything. We use the `create_hook_name(str)` utility to generate a unique name. 
+ Generating a unique name is not required but becomes important when inheriting hooks from other Classes.
+
+```python
+def callback(context, fn_args, fn_output):
+    kmph_speed = fn_args['speed'] * 1.61
+    print(f"The car is moving {kmph_speed}kmph")
+
+c = Car()
+c.move(10)
+
+c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
+```
+
+ - Here we tap into the `on_move` hook which fires our callback after the `c.move` method has executed
+ - The `c.move()` arguments are passed as `fn_args` to the callback and return value, if any, is passed as `fn_output`
+ - The context holds a `is_before` and `is_after` flag it signify if the callback was executed before or after `c.move()`
+
+# Documentation
+
+# Contributing
+
+# License
+
+# Contact
