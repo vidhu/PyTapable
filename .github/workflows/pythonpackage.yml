@@ -40,11 +40,10 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest --cov=tests/
+        pytest --cov=pytapable/
     - name: Check Coverage Over 90%
       run: |
-        ls -lah
-
+        coverage report --fail-under=90
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
