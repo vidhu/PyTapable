@@ -1,6 +1,8 @@
 <h1 align="center">
   <br>
-  <a href="http://github.com/vidhu/PyTapable"><img src="./pirate.svg" alt="Markdownify" width="200"></a>
+  <a href="http://github.com/vidhu/PyTapable">
+    <img src="https://raw.githubusercontent.com/vidhu/PyTapable/readme/docs/pirate.svg" alt="Markdownify" width="200">
+  </a>
   <br>
   PyTapable
   <br>
