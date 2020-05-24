@@ -12,12 +12,12 @@ A Library to Implement Hookable Interfaces
 
 <p align="center">
   <!-- PyPI Badge -->
-  <a href="https://pypi.org/project/PyTapable/">
+  <a href="https://pypi.org/project/PyTapable/" target="_blank">
     <img src="https://img.shields.io/pypi/v/PyTapable" alt="Gitter">
   </a>
   
   <!-- CodeCov -->
-  <a href="https://codecov.io/gh/vidhu/pytapable">
+  <a href="https://codecov.io/gh/vidhu/pytapable" target="_blank">
       <img src="https://img.shields.io/codecov/c/github/vidhu/PyTapable">
   </a>
 </p>
