@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import MagicMock
+from .common_mock import MagicMock
 
 from pytapable import Hook
 

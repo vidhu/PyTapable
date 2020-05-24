@@ -1,5 +1,5 @@
 from unittest import TestCase
-from unittest.mock import patch, MagicMock
+from .common_mock import patch
 
 from types import FunctionType
 from pytapable import HookableMixin, CreateHook, HookInterceptor, Tap, Hook

@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/vidhu/pytapable",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=['tests']),
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: Apache Software License",
@@ -21,5 +21,5 @@ setuptools.setup(
         "Topic :: Utilities",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
-    python_requires='>=3.3',
+    python_requires='>=2.7',
 )
