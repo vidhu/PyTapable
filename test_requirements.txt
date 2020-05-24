@@ -1,5 +1,7 @@
+mock
 flake8
 tox
 pytest
-coverage
-mock
+pytest-cov
+codecov
+
