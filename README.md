@@ -36,7 +36,7 @@ A Library to Implement Hookable Interfaces
   
 </p>
 
-## Table of Contents
+## :book: Table of Contents
  - [About The Project](#about-the-project)
  - [Getting Started](#getting-started)
     - [Inline Hooks Example](#inline-hooks)
