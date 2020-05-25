@@ -25,6 +25,13 @@ A Library to Implement Hookable Interfaces
 </p>
 
 ## Table of Contents
+ - [About The Project](#about-the-project)
+ - [Getting Started](#getting-started)
+    - [Inline Hooks Example](#inline-hooks)
+    - [Functional Hooks Example](#inline-hooks)
+ - [Documentation](#documentation)
+ - [Contributing](#contributing)
+ - [License](#license)
 
 ## About The Project
 PyTapable  provides a set of utility to help you implement hookable interfaces in your classes. This opens up the
@@ -99,5 +106,3 @@ c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
 # Contributing
 
 # License
-
-# Contact
