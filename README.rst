@@ -48,8 +48,8 @@
      
    </p>
 
-Table of Contents
-------------------------
+🌽 Table of Contents
+--------------------
 
 -  `About The Project <#about-the-project>`__
 -  `Getting Started <#getting-started>`__
@@ -61,18 +61,18 @@ Table of Contents
 -  `Contributing <#contributing>`__
 -  `License <#license>`__
 
-About The Project
-------------------------------
+🍓 About The Project
+--------------------
 
-| PyTapable provides a set of utility to help you implement hookable
-interfaces in your classes. This opens up the
-| posibility for solving a number of usecases such as
+| PyTapable provides a set of utility to help you implement hookable interfaces in your classes.
+| This opens up the
+  posibility for solving a number of usecases such as
 
 -  Providing plugable interfaces for your libraries and frameworks
 -  Code seperation by functional and service domains
 
-Getting Started
----------------------------------
+🌞 Getting Started
+------------------
 
 This project can be used in python 2.7, 3.5 and greater
 
@@ -104,8 +104,7 @@ and a callback function
         
     my_hook.tap('My Tap Name', callable)
 
-| Our callback is executed when the ``hook.call(...)`` is executed. The
-callback receives whatever args were passed in the
+| Our callback is executed when the ``hook.call(...)`` is executed. The callback receives whatever args were passed in the
 | ``hook.call`` method in addition to a context ``dict``
 
 .. code:: python
@@ -133,12 +132,12 @@ args are predefined.
 -  Start adding the ``HookableMixin`` to the Car Class. This is
    necessary to install hooks on class methods.
 -  Decorate the ``Car.move`` method using the ``@CreateHook`` decorator.
-   In the decorator, give it a name. As best practice
-    we define the name as a Class Constant so consumers can easily refer
+   In the decorator, give it a name. As best practice we define the name as a Class Constant so
+   consumers can easily refer
    to it.
 -  The value of the hook can be anything. We use the
    ``create_hook_name(str)`` utility to generate a unique name.
-    Generating a unique name is not required but becomes important when
+   Generating a unique name is not required but becomes important when
    inheriting hooks from other Classes.
 
 .. code:: python
@@ -159,14 +158,13 @@ args are predefined.
 -  The context holds a ``is_before`` and ``is_after`` flag it signify if
    the callback was executed before or after ``c.move()``
 
-Documentation
--------------------------------
+🍹 Documentation
+----------------
 
-Contributing
-------------------------
+😆 Contributing
+---------------
 
-| Contributions are what make the open source community such an amazing
-place to be learn, inspire, and create.
+| Contributions are what make the open source community such an amazing place to be learn, inspire, and create.
 | Any contributions you make are **greatly appreciated**.
 
 #. Fork the Project
@@ -176,7 +174,7 @@ place to be learn, inspire, and create.
 #. Push to the Branch (``git push origin feature/AmazingFeature``)
 #. Open a Pull Request
 
-:v: License
+✌️ License
 -----------
 
 Distributed under the `Apache License <LICENSE>`__
