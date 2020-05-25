@@ -36,7 +36,7 @@ A Library to Implement Hookable Interfaces
   
 </p>
 
-## :book: Table of Contents
+## :corn: Table of Contents
  - [About The Project](#about-the-project)
  - [Getting Started](#getting-started)
     - [Inline Hooks Example](#inline-hooks)
@@ -45,14 +45,14 @@ A Library to Implement Hookable Interfaces
  - [Contributing](#contributing)
  - [License](#license)
 
-## About The Project
+## :strawberry: About The Project
 PyTapable  provides a set of utility to help you implement hookable interfaces in your classes. This opens up the
 posibility for solving a number of usecases such as
 
  - Providing plugable interfaces for your libraries and frameworks
  - Code seperation by functional and service domains
 
-## Getting Started
+## :sun_with_face: Getting Started
 This project can be used in python 2.7, 3.5 and greater
 
 ```bash
@@ -115,9 +115,9 @@ c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
  - The `c.move()` arguments are passed as `fn_args` to the callback and return value, if any, is passed as `fn_output`
  - The context holds a `is_before` and `is_after` flag it signify if the callback was executed before or after `c.move()`
 
-## Documentation
+## :tropical_drink: Documentation
 
-## Contributing
+## :satisfied: Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. 
 Any contributions you make are **greatly appreciated**.
@@ -129,5 +129,5 @@ Any contributions you make are **greatly appreciated**.
 5. Open a Pull Request
 
 
-## License
+## :v: License
 Distributed under the [Apache License](LICENSE)
