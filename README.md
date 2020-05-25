@@ -115,8 +115,19 @@ c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
  - The `c.move()` arguments are passed as `fn_args` to the callback and return value, if any, is passed as `fn_output`
  - The context holds a `is_before` and `is_after` flag it signify if the callback was executed before or after `c.move()`
 
-# Documentation
+## Documentation
 
-# Contributing
+## Contributing
 
-# License
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. 
+Any contributions you make are **greatly appreciated**.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+
+## License
+Distributed under the [Apache License](LICENSE)
