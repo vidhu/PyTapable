@@ -48,7 +48,7 @@
      
    </p>
 
-:corn: Table of Contents
+Table of Contents
 ------------------------
 
 -  `About The Project <#about-the-project>`__
@@ -61,7 +61,7 @@
 -  `Contributing <#contributing>`__
 -  `License <#license>`__
 
-:strawberry: About The Project
+About The Project
 ------------------------------
 
 | PyTapable provides a set of utility to help you implement hookable
@@ -71,7 +71,7 @@ interfaces in your classes. This opens up the
 -  Providing plugable interfaces for your libraries and frameworks
 -  Code seperation by functional and service domains
 
-:sun\_with\_face: Getting Started
+Getting Started
 ---------------------------------
 
 This project can be used in python 2.7, 3.5 and greater
@@ -159,10 +159,10 @@ args are predefined.
 -  The context holds a ``is_before`` and ``is_after`` flag it signify if
    the callback was executed before or after ``c.move()``
 
-:tropical\_drink: Documentation
+Documentation
 -------------------------------
 
-:satisfied: Contributing
+Contributing
 ------------------------
 
 | Contributions are what make the open source community such an amazing
