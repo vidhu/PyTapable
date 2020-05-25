@@ -85,6 +85,8 @@ my_hook.call(greeting="Hi Callback")
 Functional hooks are different from inline hooks in that the callback args are predefined.
 ```python
 from pytapable import CreateHook, HookableMixin, create_hook_name
+
+
 class Car(HookableMixin):
     HOOK_ON_MOVE = create_hook_name('on_move')
     
