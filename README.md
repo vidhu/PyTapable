@@ -23,6 +23,12 @@ A Library to Implement Hookable Interfaces
       <img src="https://img.shields.io/codecov/c/github/vidhu/PyTapable" alt="codecov" />
   </a>
   
+  <!-- CodeCov -->
+  <a href="https://pypi.org/project/PyTapable/">
+      <img src="https://img.shields.io/pypi/pyversions/PyTapable" alt="python versions" />
+  </a>
+  
+  
   <!-- Downloads a day -->
   <a href="https://pypi.org/project/PyTapable/">
     <img src="https://img.shields.io/pypi/dd/PyTapable" alt="Downloads a Day" />
