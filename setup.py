@@ -1,11 +1,16 @@
 import setuptools
 
+
+with open("pytapable/version.py", "r") as f:
+    __version__ = None
+    exec(f.read())  # evaluate to fill in __verison__
+
 with open("README.md", "r") as f:
     long_description = f.read()
 
 setuptools.setup(
     name="PyTapable",
-    version="0.0.2",
+    version=__version__,
     author="Vidhu Bhatnagar",
     author_email="vidhu1911@gmail.com",
     description="Provides utilities to implement a hookable interface",
