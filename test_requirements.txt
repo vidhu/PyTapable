@@ -4,4 +4,4 @@ tox
 pytest
 pytest-cov
 codecov
-
+coverage

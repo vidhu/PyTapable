@@ -51,3 +51,7 @@ jobs:
         file: .coverage
         flags: pytests
         env_vars: OS,PYTHON
+    - name: Generate Documentation
+      run: |
+        cd docs
+        make html
