@@ -50,6 +50,24 @@ class FunctionalHook(BaseHook):
         """
         Triggers all taps installed on this hook.
 
+        Taps receive predefined arguments `(fn_args, fn_output, context)`
+
+        .. code-block:: python
+
+           fn_args = {
+             "args": *args,
+             "kwargs": **kwargs
+           }
+
+           fn_output = Optional[Any]
+
+           context = {
+               'hook_type': FunctionalHook.HOOK_TYPE,
+               'hook_type_label': self.label,
+               'tap_name': tap.name,
+               'is_before': is_before
+           }
+
         Args:
             fn_args (dict): The arguments the hooked function was called with. `fn_args: { args: Tuple, kwargs: Dict }`
             is_before (bool): True if the hook is being called after the hooked function has executed
@@ -85,13 +103,24 @@ class HookableMixin(object):
                 )
 
     def inherit_hooks(self, hookable_instance):
+        """
+        Given an instance which extends the :class:`~HookableMixin` class, inherits all hooks from it to expose it on
+        top level
+
+        Args:
+            hookable_instance (HookableMixin): Instance from which to inherit hooks
+        """
         self.hooks.update(hookable_instance.hooks)
 
 
 class CreateHook(object):
     """
-    Decorator used to creating Hooks on instance methods. It takes in name and optionally an instance of a
-     :class:`~pytapable.intercept_base.HookInterceptor`
+    Decorator used for creating Hooks on instance methods. It takes in a name and optionally an instance of a
+    :class:`~pytapable.intercept_base.HookInterceptor`.
+
+    .. note::
+        This decorator doesn't actually create the hook. It just annotates the method. The hooks are created by the
+        :class:`~HookableMixin` when the class is instantiated
     """
     def __init__(self, name, interceptor=None):
         self.name = name

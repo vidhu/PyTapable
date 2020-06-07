@@ -1,14 +1,22 @@
-.. PyTapable documentation master file, created by
-   sphinx-quickstart on Sat Jun  6 14:40:33 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to PyTapable's documentation!
-=====================================
+PyTapable Documentation
+=======================
 
 .. toctree::
    :maxdepth: 2
+   :hidden:
    :caption: Contents:
+
+   inline_hooks
+   functional_hooks
+   interceptors
+   complex_example
+   contributing
+
+Installation
+------------
+.. code-block:: bash
+
+   $ pip install pytapable
 
 Introduction
 ------------
@@ -16,13 +24,23 @@ PyTapable provides a way to attach hooks into your application. Its a way to imp
 side effects. This is particularly useful to maintain service boundaries in your application, allow plugable in
 your libraries which you users can extend upon etc
 
-.. note::
-   Lets first clarify the terminologies used in this library
 
-   - **Hook:** A Hook is an object which maintains a list of taps that have been installed/registered with it
-   - **Tap:** A Tap is an object which holds a reference to the function which is to be run when a hook is *executed*.
-   - **tapping:** Tapping into a hook is the act of registering a callable with a hook
-   - **Callbacks:** Consumer defined function which is executed in response to a hook being triggered
+Lets first clarify the terminologies used in this library
+
+.. glossary::
+
+   Hook
+      A Hook is an object which maintains a list of taps that have been installed/registered with it
+
+   Tap
+      A Tap is an object which holds a reference to the function which is to be run when a hook is *executed*.
+
+   tapping
+      Tapping into a hook is the act of registering a callable with a hook
+
+   callbacks
+      Consumer defined function/callable which is executed in response to a hook being triggered
+
 
 There are two types of hooks provided in this library
 
