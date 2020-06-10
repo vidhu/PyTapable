@@ -24,7 +24,6 @@ jobs:
           'py36',
           'py37',
           'py38',
-          'docs'
         ]
         include:
           - name: 'py27'
@@ -38,8 +37,6 @@ jobs:
           - name: 'py38'
             python: '3.8'
           - send_coverage: true
-          - name: 'docs'
-            python: '3.8'
 
     steps:
     - uses: actions/checkout@v2
@@ -74,15 +71,3 @@ jobs:
         file: coverage.xml
         flags: pytests
         env_vars: OS,PYTHON
-
-  docs:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-python@v2
-      with:
-        python-version: '3.8'
-    - name: Build Docs
-      run: |
-        cd docs
-        make html
