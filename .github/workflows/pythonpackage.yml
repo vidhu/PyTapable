@@ -66,7 +66,7 @@ jobs:
     - name: Check Coverage Over 90%
       run: |
         coverage report --fail-under=90
-    - name: Upload coverage to Codecov
+    - name: Report coverage
       if: (matrix.send_coverage)
       uses: codecov/codecov-action@v1
       with:
@@ -74,11 +74,6 @@ jobs:
         file: coverage.xml
         flags: pytests
         env_vars: OS,PYTHON
-    - name: Report coverage
-        if: (matrix.use_coverage)
-        env:
-          CODECOV_NAME: ${{ matrix.name }}
-        run: bash scripts/report-coverage.sh -F GHA,${{ runner.os }}
 
   docs:
     runs-on: ubuntu-latest
