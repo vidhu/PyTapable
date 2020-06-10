@@ -1,7 +1,3 @@
-# Build Requirements
-sphinx
-sphinx_rtd_theme
-
 # Test Requirements
 mock
 flake8

@@ -140,6 +140,7 @@ Any contributions you make are **greatly appreciated**.
 
 To tests on your changes locally, run:
 ```bash
+$ pip install -r test_requirements.txt
 $ tox .
 ```
 This will run your changes on python-2 and python-3
