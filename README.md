@@ -124,6 +124,9 @@ c.move(10)
 
 ## :tropical_drink: Documentation
 
+Full documentation is available here
+https://pytapable.readthedocs.io/en/latest
+
 ## :satisfied: Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. 
