@@ -19,8 +19,8 @@ To tests on your changes locally, run:
 
 This will run your changes on python-2 and python-3
 
-Documentation for any new changes are a must. We use `Sphinx <https://www.sphinx-doc.org/en/master/>`__ and to build the
-documentation locally, run:
+Documentation for any new changes to APIs are a must. We use `Sphinx <https://www.sphinx-doc.org/en/master/>`__ and to
+build the documentation locally, run:
 
 .. code-block:: bash
 
