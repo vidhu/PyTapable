@@ -1,2 +1,0 @@
-A Complex Example
-*****************

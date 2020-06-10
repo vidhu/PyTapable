@@ -7,8 +7,8 @@ Functional hooks are hooks which wrap a function. They fire before and after the
 
 They are created using decorators on the function.
 
-Useage on Class Instance methods
---------------------------------
+Usage on Class Instance methods
+-------------------------------
 
 .. code-block:: python
 
@@ -42,6 +42,23 @@ These newly created hooks are stored on the ``instance.hooks`` attribute which i
 Arguments passed to callables from a FunctionalHook are predefined unlike InlineHooks. Refer to the documentation below
 to understand the arguments
 
+Inheritance
+^^^^^^^^^^^
+``HookableMixin`` allows you to inherit hooks from other classes that implement the ``HookableMixin``
+
+.. code-block:: python
+   :emphasize-lines: 7,10
+
+   class MyClass(HookableMixin):
+
+      def __init__(self):
+         super(MyClass, self).__init__()
+         self.car = Car()
+
+         self.inherit_hooks(self.car)
+
+   my_class = MyClass()
+   my_class.hooks[Car.HOOK_ON_MOVE].tap(...)
 
 API Documentation
 -----------------

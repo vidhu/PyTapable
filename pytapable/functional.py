@@ -107,6 +107,8 @@ class HookableMixin(object):
         Given an instance which extends the :class:`~HookableMixin` class, inherits all hooks from it to expose it on
         top level
 
+        References to the inherited hooks are added in the ``self.hooks`` dict
+
         Args:
             hookable_instance (HookableMixin): Instance from which to inherit hooks
         """

@@ -2,14 +2,14 @@ PyTapable Documentation
 =======================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :hidden:
    :caption: Contents:
 
    inline_hooks
    functional_hooks
    interceptors
-   complex_example
+   recipes
    contributing
 
 Installation
