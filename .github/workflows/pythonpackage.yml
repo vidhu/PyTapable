@@ -18,19 +18,42 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [2.7, 3.5, 3.6, 3.7, 3.8]
+        name: [
+          'py27',
+          'py35',
+          'py36',
+          'py37',
+          'py38',
+          'docs'
+        ]
+        include:
+          - name: 'py27'
+            python: '2.7'
+          - name: 'py35'
+            python: '3.5'
+          - name: 'py36'
+            python: '3.6'
+          - name: 'py37'
+            python: '3.7'
+          - name: 'py38'
+            python: '3.8'
+          - name: 'docs'
+            python: '3.8'
+            send_coverage: true
 
     steps:
     - uses: actions/checkout@v2
-    - name: Set up Python ${{ matrix.python-version }}
+      with:
+        fetch-depth: 0
+
+    - name: Set up Python ${{ matrix.python }}
       uses: actions/setup-python@v2
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: ${{ matrix.python }}
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r test_requirements.txt
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
         if [ -f test_requirements.txt ]; then pip install -r test_requirements.txt; fi
     - name: Lint with flake8
       run: |
@@ -45,6 +68,7 @@ jobs:
       run: |
         coverage report --fail-under=90
     - name: Upload coverage to Codecov
+      if: (matrix.send_coverage)
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN  }}
