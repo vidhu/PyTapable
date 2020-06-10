@@ -135,6 +135,22 @@ Any contributions you make are **greatly appreciated**.
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+To tests on your changes locally, run:
+```bash
+$ tox .
+```
+This will run your changes on python-2 and python-3
+
+Documentation for any new changes are a must. We use [Sphinx](https://www.sphinx-doc.org/en/master/) and to build the
+documentation locally, run:
+
+```bash
+$ cd docs/
+$ make html
+    # or on windows
+$ make.bat html
+
+```
 
 ## :v: License
 Distributed under the [Apache License](LICENSE)
