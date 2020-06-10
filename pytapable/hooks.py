@@ -72,12 +72,13 @@ def create_hook_name(name=""):
 def create_hook_names(*names):
     """
     Useful shortcut to create multiple unique hook names in one statement
+
     Example:
         >>> HOOK_MY, HOOK_UNIQUE, HOOK_HOOK = create_hook_names('my', 'unique', 'hook')
         >>> HOOK_ONE, HOOK_TWO, HOOK_THREE = create_hook_names(range(3))
 
     Args:
-        *names: Argument of hook names
+        \*names: Argument of hook names
     Returns:
         Iterable: iterable which can be deconstructed across constants.
     """
