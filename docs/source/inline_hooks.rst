@@ -53,11 +53,13 @@ In a Class
          return f"Moving at {speed}Mph"
 
 
-.. note:: When using inline hooks in a class, its useful to have the class extend the `HookableMixin` class and create
-   the hooks in the ``self.hooks`` dictionary. This allows inheriting hooks.
+.. note::
+   When using inline hooks in a class, its useful to have the class extend the :class:`HookableMixin` class and
+   create the hooks in the ``self.hooks`` dictionary. This allows inheriting hooks.
 
-API Documentation
------------------
+
+Inline Hooks Documentation
+--------------------------
 
 Hook
 ^^^^

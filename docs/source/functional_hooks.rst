@@ -33,18 +33,19 @@ Usage on Class Instance methods
 How it works
 ^^^^^^^^^^^^
 
-When a method is decorated using the ``@CreateHook`` decorator, the wrapped function is marked. The class must extend the
-``HookableMixin`` class. This is necessary because when the ``Car`` class is initialized, the hookable mixin goes through
-all the marked methods and constructs a ``FunctionalHook`` for each of them.
+When a method is decorated using the :func:`CreateHook` decorator, the wrapped function is marked. The class must extend
+the :class:`HookableMixin` class. This is necessary because when the ``Car`` class is initialized, the hookable mixin
+goes through all the marked methods and constructs a :class:`FunctionalHook`` for each of them.
 
-These newly created hooks are stored on the ``instance.hooks`` attribute which is defined by the ``HookableMixin`` class
+These newly created hooks are stored on the ``instance.hooks`` attribute which is defined by the :class:`HookableMixin`
+class
 
-Arguments passed to callables from a FunctionalHook are predefined unlike InlineHooks. Refer to the documentation below
-to understand the arguments
+Arguments passed to callables from a :class:`FunctionalHook` are predefined unlike :class:`Hook` (inline hook).
+Refer to the documentation below to understand the arguments
 
 Inheritance
 ^^^^^^^^^^^
-``HookableMixin`` allows you to inherit hooks from other classes that implement the ``HookableMixin``
+:class:`HookableMixin` allows you to inherit hooks from other classes that implement the :class:`HookableMixin`
 
 .. code-block:: python
    :emphasize-lines: 7,10
@@ -60,8 +61,8 @@ Inheritance
    my_class = MyClass()
    my_class.hooks[Car.HOOK_ON_MOVE].tap(...)
 
-API Documentation
------------------
+Functional Hooks Documentation
+------------------------------
 
 FunctionalHook
 ^^^^^^^^^^^^^^

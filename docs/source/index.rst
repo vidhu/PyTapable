@@ -4,7 +4,7 @@ PyTapable Documentation
 .. toctree::
    :maxdepth: 3
    :hidden:
-   :caption: Contents
+   :caption: Contents:
 
    inline_hooks
    functional_hooks
@@ -41,18 +41,25 @@ Lets first clarify the terminologies used in this library
    callbacks
       Consumer defined function/callable which is executed in response to a hook being triggered
 
+Type of Hooks
+^^^^^^^^^^^^^
 
 There are two types of hooks provided in this library
 
  - **FunctionalHook:** Functional hooks are hooks which wrap a function. They fire before and after the execution of a
-   function automatically. They are created using decorators on the function.
+   function automatically. They are created using decorators on the function. See :doc:`functional_hooks`
  - **InlineHook:** Inline hooks are created and triggered manually. They are used in the body of functions and modules
+   See :doc:`inline_hooks`
 
-Apart from these differences, the parameter your callbacks are called with differ based on which hooks there were called
+The parameter your :term:`callbacks` are called with differ based on which hooks there were called
 from. Callbacks from a functional hook contain the function's arguments and return value (if available) whereas
 callbacks from an inline hook contain parameters defined by the caller
 
-A context dict is also passed to the callback function which contain various metadata. This is covered is more detail
+Context
+^^^^^^^
+
+A context dict is also passed to the callback function which contain various metadata. This is covered in more detail
+in the API doc for :ref:`FunctionalHook` and :ref:`Hook`
 
 Quick Start
 -----------
