@@ -1,7 +1,7 @@
 from unittest import TestCase
 from .common_mock import MagicMock
 
-from pytapable import HookableMixin, CreateHook, BaseHook
+from pytapable import HookableMixin, CreateHook, BaseHook, create_hook_name, create_hook_names
 
 HOOK_MOVE = 'move_hook_name'
 TAP_NAME = 'my_tap'
@@ -15,6 +15,16 @@ class Car(HookableMixin):
 
 
 class TestInstanceLevelHooks(TestCase):
+
+    @classmethod
+    def create_instance(cls):
+        return Car()
+
+    @classmethod
+    def install_tap(cls, instance, **kwargs):
+        callback = MagicMock()
+        instance.hooks[HOOK_MOVE].tap(TAP_NAME, callback, **kwargs)
+        return callback
 
     def test_create_hook(self):
         c = self.create_instance()
@@ -118,12 +128,21 @@ class TestInstanceLevelHooks(TestCase):
             }
         )
 
-    @classmethod
-    def create_instance(cls):
-        return Car()
+    def test_create_hook_name(self):
+        name = 'MY_HOOK'
+        hook1 = create_hook_name(name)
+        hook2 = create_hook_name(name)
+        hook3 = create_hook_name()
 
-    @classmethod
-    def install_tap(cls, instance, **kwargs):
-        callback = MagicMock()
-        instance.hooks[HOOK_MOVE].tap(TAP_NAME, callback, **kwargs)
-        return callback
+        assert hook1 != hook2
+        assert name in hook1
+        assert name in hook2
+        assert hook3 != ''
+
+    def test_create_hook_names(self):
+        (hook1, hook2, hook3) = create_hook_names(*range(3))
+
+        assert len({hook1, hook2, hook3}) == 3
+
+        for hook in [hook1, hook2, hook3]:
+            assert hook != ''

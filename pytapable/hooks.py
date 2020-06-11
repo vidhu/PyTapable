@@ -1,8 +1,6 @@
 import uuid
-from typing import Iterable, Optional
+from typing import Iterable
 from collections import namedtuple
-
-from .intercept_base import HookInterceptor
 
 HookConfig = namedtuple('HookConfig', ['name', 'interceptor'])
 
@@ -75,12 +73,13 @@ def create_hook_names(*names):
 
     Example:
         >>> HOOK_MY, HOOK_UNIQUE, HOOK_HOOK = create_hook_names('my', 'unique', 'hook')
-        >>> HOOK_ONE, HOOK_TWO, HOOK_THREE = create_hook_names(range(3))
+        >>> HOOK_ONE, HOOK_TWO, HOOK_THREE = create_hook_names(*range(3))
 
     Args:
         \*names: Argument of hook names
     Returns:
         Iterable: iterable which can be deconstructed across constants.
     """
+
     for name in names:
         yield create_hook_name(name)

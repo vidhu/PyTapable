@@ -79,7 +79,7 @@ As a consumer, we can tap into this hook by passing a name for our tap and a cal
 def my_callback(context, greeting):
     print(f"Hook says: {greeting}")
     
-my_hook.tap('My Tap Name', callable)
+my_hook.tap('My Tap Name', my_callback)
 ```
 Our callback is executed when the `hook.call(...)` is executed. The callback receives whatever args were passed in the
 `hook.call` method in addition to a context `dict`
@@ -98,7 +98,7 @@ class Car(HookableMixin):
     
     @CreateHook(name=HOOK_ON_MOVE)
     def move(self, speed=10):
-        return f"Moving at {speed}Mph"
+        return f"Moving at {speed} Mph"
 ```
  - Start adding the `HookableMixin` to the Car Class. This is necessary to install hooks on class methods.
  - Decorate the `Car.move` method using the `@CreateHook` decorator. In the decorator, give it a name. As best practice 
@@ -109,12 +109,13 @@ class Car(HookableMixin):
 ```python
 def callback(context, fn_args, fn_output):
     kmph_speed = fn_args['speed'] * 1.61
-    print(f"The car is moving {kmph_speed}kmph")
+    print(f"The car is moving {kmph_speed} kmph")
 
 c = Car()
+c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
+
 c.move(10)
 
-c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
 ```
 
  - Here we tap into the `on_move` hook which fires our callback after the `c.move` method has executed
@@ -122,6 +123,9 @@ c.hooks[Car.HOOK_ON_MOVE].tap('log_metric_speed', callback, before=False)
  - The context holds a `is_before` and `is_after` flag it signify if the callback was executed before or after `c.move()`
 
 ## :tropical_drink: Documentation
+
+Full documentation is available here
+https://pytapable.readthedocs.io/en/latest
 
 ## :satisfied: Contributing
 
@@ -134,6 +138,23 @@ Any contributions you make are **greatly appreciated**.
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+To tests on your changes locally, run:
+```bash
+$ pip install -r test_requirements.txt
+$ tox .
+```
+This will run your changes on python-2 and python-3
+
+Documentation for any new changes are a must. We use [Sphinx](https://www.sphinx-doc.org/en/master/) and to build the
+documentation locally, run:
+
+```bash
+$ cd docs/
+$ make html
+    # or on windows
+$ make.bat html
+
+```
 
 ## :v: License
 Distributed under the [Apache License](LICENSE)
