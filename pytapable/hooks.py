@@ -1,8 +1,6 @@
 import uuid
-from typing import Iterable, Optional
+from typing import Iterable
 from collections import namedtuple
-
-from .intercept_base import HookInterceptor
 
 HookConfig = namedtuple('HookConfig', ['name', 'interceptor'])
 

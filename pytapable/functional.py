@@ -1,4 +1,3 @@
-from typing import Callable, Union, Optional, Any
 from functools import partial, wraps
 from .hooks import BaseHook, Tap, HookConfig
 
