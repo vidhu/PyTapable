@@ -36,7 +36,7 @@ jobs:
             python: '3.7'
           - name: 'py38'
             python: '3.8'
-          - send_coverage: true
+            send_coverage: true
 
     steps:
     - uses: actions/checkout@v2
@@ -64,7 +64,7 @@ jobs:
       run: |
         coverage report --fail-under=90
     - name: Report coverage
-      if: ${{matrix.send_coverage}}
+      if: matrix.send_coverage
       uses: codecov/codecov-action@v1
       with:
         token: ${{ secrets.CODECOV_TOKEN  }}
