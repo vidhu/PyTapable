@@ -15,7 +15,10 @@ A Library to Implement Hookable Interfaces
 <p align="center">
   <!-- Build Status -->
   
-  ![Tests](https://github.com/vidhu/PyTapable/workflows/Tests/badge.svg)
+  <!-- Test Status -->
+  <a href="https://github.com/vidhu/PyTapable/actions?query=branch%3Amaster+event%3Apush">
+      <img src="https://github.com/vidhu/PyTapable/workflows/Tests/badge.svg" alt="codecov" />
+  </a>
   
   <!-- PyPI Badge -->
   <a href="https://pypi.org/project/PyTapable/">
@@ -43,7 +46,8 @@ A Library to Implement Hookable Interfaces
     <img src="https://img.shields.io/pypi/l/pytapable" alt="Downloads a Day" />
   </a>
   
-  ![Maintenance](https://img.shields.io/badge/Maintained-yes-green.svg)
+  <!-- Maintained Status -->
+  <img src="https://img.shields.io/badge/Maintained-yes-green.svg" alt="codecov" />
   
 </p>
 
