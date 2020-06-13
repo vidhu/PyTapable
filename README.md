@@ -33,7 +33,7 @@ A Library to Implement Hookable Interfaces
       <img src="https://img.shields.io/pypi/pyversions/PyTapable" alt="python versions" />
   </a>
   
-  <!-- Maintainability / Code Quality
+  <!-- Maintainability / Code Quality -->
   <a href="https://codeclimate.com/github/vidhu/PyTapable/maintainability">
     <img src="https://api.codeclimate.com/v1/badges/f26988bb91b39a67c08e/maintainability" />
   </a>
