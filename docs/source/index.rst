@@ -25,7 +25,7 @@ PyTapable Documentation
    :alt: Code Coverage
 
 .. image:: https://img.shields.io/pypi/pyversions/PyTapable
-   :target: https://codeclimate.com/github/vidhu/PyTapable/maintainability
+   :target: https://img.shields.io/pypi/pyversions/PyTapable
    :alt: Python Versions
 
 .. image:: https://api.codeclimate.com/v1/badges/f26988bb91b39a67c08e/maintainability
@@ -33,15 +33,14 @@ PyTapable Documentation
    :alt: Maintainability and Code Quality
 
 .. image:: https://img.shields.io/pypi/dd/PyTapable
-   :target: https://codeclimate.com/github/vidhu/PyTapable/maintainability
+   :target: https://pypi.org/project/PyTapable/
    :alt: Downloads a day
 
 .. image:: https://img.shields.io/pypi/l/pytapable
-   :target: https://codeclimate.com/github/vidhu/PyTapable/maintainability
+   :target: https://github.com/vidhu/PyTapable/blob/master/LICENSE
    :alt: License
 
 .. image:: https://img.shields.io/badge/Maintained-yes-green.svg
-   :target: https://codeclimate.com/github/vidhu/PyTapable/maintainability
    :alt: Maintained
 
 
