@@ -15,7 +15,7 @@ A Library to Implement Hookable Interfaces
 <p align="center">  
   <!-- Test Status -->
   <a href="https://github.com/vidhu/PyTapable/actions?query=branch%3Amaster+event%3Apush">
-      <img src="https://github.com/vidhu/PyTapable/workflows/Tests/badge.svg" alt="codecov" />
+      <img src="https://github.com/vidhu/PyTapable/workflows/Tests/badge.svg" alt="Test Status" />
   </a>
   
   <!-- PyPI Badge -->
@@ -28,12 +28,12 @@ A Library to Implement Hookable Interfaces
       <img src="https://img.shields.io/codecov/c/github/vidhu/PyTapable" alt="codecov" />
   </a>
   
-  <!-- CodeCov -->
+  <!-- Python Versions -->
   <a href="https://pypi.org/project/PyTapable/">
       <img src="https://img.shields.io/pypi/pyversions/PyTapable" alt="python versions" />
   </a>
   
-  <!-- CodeQuality
+  <!-- Maintainability / Code Quality
   <a href="https://codeclimate.com/github/vidhu/PyTapable/maintainability">
     <img src="https://api.codeclimate.com/v1/badges/f26988bb91b39a67c08e/maintainability" />
   </a>
@@ -45,11 +45,11 @@ A Library to Implement Hookable Interfaces
   
   <!-- License -->
   <a href="https://pypi.org/project/PyTapable/">
-    <img src="https://img.shields.io/pypi/l/pytapable" alt="Downloads a Day" />
+    <img src="https://img.shields.io/pypi/l/pytapable" alt="License" />
   </a>
   
   <!-- Maintained Status -->
-  <img src="https://img.shields.io/badge/Maintained-yes-green.svg" alt="codecov" />
+  <img src="https://img.shields.io/badge/Maintained-yes-green.svg" alt="Maintained" />
   
 </p>
 
