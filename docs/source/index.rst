@@ -25,7 +25,7 @@ PyTapable Documentation
    :alt: Code Coverage
 
 .. image:: https://img.shields.io/pypi/pyversions/PyTapable
-   :target: https://img.shields.io/pypi/pyversions/PyTapable
+   :target: https://pypi.org/project/PyTapable/#history
    :alt: Python Versions
 
 .. image:: https://api.codeclimate.com/v1/badges/f26988bb91b39a67c08e/maintainability
