@@ -44,8 +44,8 @@ A Library to Implement Hookable Interfaces
   </a>
   
   <!-- License -->
-  <a href="https://pypi.org/project/PyTapable/">
-    <img src="https://github.com/vidhu/PyTapable/blob/master/LICENSE" alt="License" />
+  <a href="https://github.com/vidhu/PyTapable/blob/master/LICENSE">
+    <img src="https://img.shields.io/pypi/l/pytapable" alt="License" />
   </a>
   
   <!-- Maintained Status -->
