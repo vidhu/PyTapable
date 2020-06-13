@@ -1,4 +1,4 @@
-Recipies
+Recipes
 ********
 
 Here's a list of interesting ways to use hooks. If you find an interesting way to use hooks that's worthy of sharing,

@@ -20,7 +20,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 project = 'PyTapable'
 copyright = '2020, Vidhu'
 author = 'Vidhu'
-
+html_logo = os.path.join(os.path.dirname(__file__), '../pirate.svg')
+html_css_files = [
+    'css/custom.css',
+]
 
 # -- General configuration ---------------------------------------------------
 master_doc = 'index'
