@@ -1,4 +1,4 @@
-<h1 align="center">
+<h1 align="center" style="text-align: center">
   <br>
   <a href="http://github.com/vidhu/PyTapable">
     <img src="https://raw.githubusercontent.com/vidhu/PyTapable/master/docs/pirate.svg" alt="Pirate" width="200">
