@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -23,5 +23,4 @@ jobs:
       uses: pypa/gh-action-pypi-publish@6a02ab8
       with:
         user: __token__
-        password: ${{ secrets.PYPI_TEST }}
-        repository_url: https://test.pypi.org/legacy/
+        password: ${{ secrets.PYPI }}
