@@ -37,6 +37,7 @@ jobs:
           - name: 'py38'
             python: '3.8'
             send_coverage: true
+            publish: true
 
     steps:
     - uses: actions/checkout@v2
@@ -71,3 +72,15 @@ jobs:
         file: coverage.xml
         flags: pytests
         env_vars: OS,PYTHON
+    - name: Package Library
+      if: ${{ matrix.publish }}
+      run: |
+        pip install --user --upgrade setuptools wheel
+        python setup.py sdist bdist_wheel
+    - name: Package Library
+      if: ${{ matrix.publish }}
+      uses: pypa/gh-action-pypi-publish@master
+      with:
+        user: __token__
+        password: ${{ secrets.pypi_password }}
+        repository_url: https://test.pypi.org/simple/
