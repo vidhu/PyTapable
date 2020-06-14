@@ -31,5 +31,5 @@ setuptools.setup(
         "Topic :: Utilities",
         "Topic :: Software Development :: Libraries :: Python Modules"
     ],
-    python_requires='>=2.7',
+    python_requires='>=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*, <4',
 )
