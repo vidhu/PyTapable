@@ -44,7 +44,7 @@ class HookInterceptorTests(TestCase):
         assert c.hooks[HOOK_MOVE].taps[0] == modified_tap
 
     def test_register_inline(self):
-        my_hook = Hook(interceptor)
+        my_hook = Hook(interceptor=interceptor)
 
         # Tap into hook to trigger register intercept
         modified_tap = 'modified_tap'
