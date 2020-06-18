@@ -107,8 +107,8 @@ InlineHooks
    my_hook = Hook()
 
    # 2. Define a function to execute when hook triggers
-   def my_callback(context, greeting):
-      print(f"Hook says: {greeting}")
+   def my_callback(context, args, kwargs):
+      print(f"Hook says: {kwargs['greeting']}")
 
    # 3. Tap into our hook
    my_hook.tap('My Tap Name', my_callback)

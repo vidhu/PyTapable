@@ -18,8 +18,8 @@ Inline
    my_hook = Hook()
 
    # 2. Define a function to execute when hook triggers
-   def my_callback(context, greeting):
-      print(f"Hook says: {greeting}")
+   def my_callback(context, args, kwargs):
+      print(f"Hook says: {kwargs['greeting']}")
 
    # 3. Tap into our hook
    my_hook.tap('My Tap Name', my_callback)
@@ -45,7 +45,7 @@ In a Class
          super(Car, self).__init__()
 
          # 2. Define the hook
-         self.hooks[HOOK_ON_MOVE] = Hook()
+         self.hooks.add_hook(Hook(HOOK_ON_MOVE))
 
       def move(self, speed=10):
          # 3. Trigger the hook
@@ -55,7 +55,7 @@ In a Class
 
 .. note::
    When using inline hooks in a class, its useful to have the class extend the :class:`HookableMixin` class and
-   create the hooks in the ``self.hooks`` dictionary. This allows inheriting hooks.
+   create the hooks in the ``self.hooks`` dictionary. This allows for other classes to inherit hooks.
 
 
 Inline Hooks Documentation

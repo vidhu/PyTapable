@@ -169,3 +169,5 @@ $ make.bat html
 
 ## :v: License
 Distributed under the [Apache License](LICENSE)
+
+Logo made by [Smashicons](https://www.flaticon.com/authors/smashicons)

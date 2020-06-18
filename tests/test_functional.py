@@ -1,7 +1,7 @@
 from unittest import TestCase
 from .common_mock import MagicMock
 
-from pytapable import HookableMixin, CreateHook, BaseHook, create_hook_name, create_hook_names
+from pytapable import HookableMixin, CreateHook, BaseHook, create_hook_name, create_hook_names, Hook
 
 HOOK_MOVE = 'move_hook_name'
 TAP_NAME = 'my_tap'
@@ -60,6 +60,7 @@ class TestInstanceLevelHooks(TestCase):
             context={
                 'hook_type': BaseHook.FUNCTIONAL,
                 'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
+                'hook_name': HOOK_MOVE,
                 'tap_name': TAP_NAME,
                 'is_before': True
             }
@@ -75,6 +76,7 @@ class TestInstanceLevelHooks(TestCase):
             context={
                 'hook_type': BaseHook.FUNCTIONAL,
                 'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
+                'hook_name': HOOK_MOVE,
                 'tap_name': TAP_NAME,
                 'is_before': False
             }
@@ -99,6 +101,7 @@ class TestInstanceLevelHooks(TestCase):
             context={
                 'hook_type': BaseHook.FUNCTIONAL,
                 'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
+                'hook_name': HOOK_MOVE,
                 'tap_name': TAP_NAME,
                 'is_before': True
             }
@@ -123,6 +126,7 @@ class TestInstanceLevelHooks(TestCase):
             context={
                 'hook_type': BaseHook.FUNCTIONAL,
                 'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
+                'hook_name': HOOK_MOVE,
                 'tap_name': TAP_NAME,
                 'is_before': False
             }

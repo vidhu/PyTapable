@@ -31,9 +31,14 @@ class BaseHook(object):
         INLINE: 'Inline'
     }
 
-    def __init__(self, interceptor=None):
-        self.taps = []
+    def __init__(self, name=None, interceptor=None):
+        """
+        Args:
+             name (str): Name of the hook. If a name is not provided, a random name will be generated
+        """
+        self.name = name or create_hook_name('undefined')
         self.interceptor = interceptor
+        self.taps = []
 
     def tap(self, *args, **kwargs):
         pass
@@ -76,7 +81,7 @@ def create_hook_names(*names):
         >>> HOOK_ONE, HOOK_TWO, HOOK_THREE = create_hook_names(*range(3))
 
     Args:
-        \*names: Argument of hook names
+        *names: Argument of hook names
     Returns:
         Iterable: iterable which can be deconstructed across constants.
     """
