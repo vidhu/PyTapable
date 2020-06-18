@@ -45,7 +45,7 @@ In a Class
          super(Car, self).__init__()
 
          # 2. Define the hook
-         self.hooks[HOOK_ON_MOVE] = Hook()
+         self.hooks.add_hook(Hook(HOOK_ON_MOVE))
 
       def move(self, speed=10):
          # 3. Trigger the hook

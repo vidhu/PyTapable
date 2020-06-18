@@ -63,6 +63,7 @@ class FunctionalHook(BaseHook):
            context = {
                'hook_type': FunctionalHook.HOOK_TYPE,
                'hook_type_label': self.label,
+               'hook_name': self.name,
                'tap_name': tap.name,
                'is_before': is_before
            }
@@ -80,38 +81,55 @@ class FunctionalHook(BaseHook):
                     context={
                         'hook_type': FunctionalHook.HOOK_TYPE,
                         'hook_type_label': self.label,
+                        'hook_name': self.name,
                         'tap_name': tap.name,
                         'is_before': is_before
                     }
                 )
 
 
-class HookableMixin(object):
+class HookMapping(dict):
     """
-    Mixin which instantiates all the decorated class methods. This is needed for decorated class methods
+    A dict like object with helper methods to inherit hooks and add hooks
     """
-    def __init__(self, *args, **kwargs):
-        super(HookableMixin, self).__init__(*args, **kwargs)
-        self.hooks = {}
-        klass = type(self)
-        for method in map(partial(getattr, klass), dir(klass)):
-            if hasattr(method, '_pytapable'):
-                hook_config = getattr(method, '_pytapable')
-                self.hooks[hook_config.name] = FunctionalHook(
-                    interceptor=hook_config.interceptor
-                )
 
     def inherit_hooks(self, hookable_instance):
         """
         Given an instance which extends the :class:`HookableMixin` class, inherits all hooks from it to expose it on
         top level
 
-        References to the inherited hooks are added in the ``self.hooks`` dict
-
         Args:
             hookable_instance (HookableMixin): Instance from which to inherit hooks
         """
-        self.hooks.update(hookable_instance.hooks)
+        self.update(hookable_instance.hooks)
+
+    def add_hook(self, hook):
+        """
+        Adds the passed in hook to the hooks mapping dict
+
+        Args:
+            hook (BaseHook): Hook to add to the mapping
+        """
+        self[hook.name] = hook
+
+
+class HookableMixin(object):
+    """
+    Mixin which instantiates all the decorated class methods. This is needed for decorated class methods
+
+    Instantiates an instance property ``self.hook`` which is a :class:`HookMapping`
+    """
+    def __init__(self, *args, **kwargs):
+        super(HookableMixin, self).__init__(*args, **kwargs)
+        self.hooks = HookMapping()
+        klass = type(self)
+        for method in map(partial(getattr, klass), dir(klass)):
+            if hasattr(method, '_pytapable'):
+                hook_config = getattr(method, '_pytapable')
+                self.hooks.add_hook(FunctionalHook(
+                    name=hook_config.name,
+                    interceptor=hook_config.interceptor
+                ))
 
 
 class CreateHook(object):

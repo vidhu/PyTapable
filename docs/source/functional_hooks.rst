@@ -56,7 +56,7 @@ Inheritance
          super(MyClass, self).__init__()
          self.car = Car()
 
-         self.inherit_hooks(self.car)
+         self.hooks.inherit_hooks(self.car)
 
    my_class = MyClass()
    my_class.hooks[Car.HOOK_ON_MOVE].tap(...)
@@ -77,7 +77,11 @@ CreateHook
 HookableMixin
 ^^^^^^^^^^^^^
 .. autoclass:: HookableMixin
-   :members: inherit_hooks
+
+HookMapping
+^^^^^^^^^^^
+.. autoclass:: HookMapping
+   :members:
 
 create_hook_name
 ^^^^^^^^^^^^^^^^
