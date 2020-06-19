@@ -1,4 +1,6 @@
 import uuid
+
+from abc import abstractmethod
 from typing import Iterable
 from collections import namedtuple
 
@@ -40,9 +42,11 @@ class BaseHook(object):
         self.interceptor = interceptor
         self.taps = []
 
+    @abstractmethod
     def tap(self, *args, **kwargs):
         pass
 
+    @abstractmethod
     def call(self, *args, **kwargs):
         pass
 

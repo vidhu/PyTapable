@@ -15,18 +15,39 @@ class Hook(BaseHook):
             fn (Callable): callable to execute when hook is triggered
         """
         tap = Tap(name=name, fn=fn)
-        tap = self.interceptor.register(tap) if self.interceptor else tap
+        tap = self.interceptor.register(
+            context={
+                'hook': self
+            },
+            tap=tap
+        ) if self.interceptor else tap
         self.taps.append(tap)
 
     def call(self, *args, **kwargs):
         """
-        Triggers the hook which executes all the taps with arguments passed as is
+        Triggers the hook which executes all the taps with a arguments passed in args, kwargs and a context dict
+
+        .. code-block:: python
+
+            # Arguments to a callback
+
+           "fn_args": *args,
+           "fn_kwargs": **kwargs
+
+           context = {
+             'hook': Hook,
+             'tap': Tap,
+           }
+
+
         """
         for tap in self.taps:
-            context = {
-                'hook_type': BaseHook.INLINE,
-                'hook_type_label': self.label,
-                'hook_name': self.name,
-                'tap_name': tap.name
-            }
-            tap.fn(context=context, args=args, kwargs=kwargs)
+            tap.fn(
+                context={
+                    'hook': self,
+                    'tap': tap
+                },
+                fn_args = args,
+                fn_kwargs = kwargs
+            )
+

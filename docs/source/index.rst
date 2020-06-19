@@ -107,8 +107,8 @@ InlineHooks
    my_hook = Hook()
 
    # 2. Define a function to execute when hook triggers
-   def my_callback(context, args, kwargs):
-      print(f"Hook says: {kwargs['greeting']}")
+   def my_callback(context, fn_args, fn_kwargs):
+      print(f"Hook says: {fn_kwargs['greeting']}")
 
    # 3. Tap into our hook
    my_hook.tap('My Tap Name', my_callback)
@@ -142,8 +142,8 @@ and then tap into the hook
 
 .. code-block:: python
 
-   def log_metric_speed(context, fn_args, fn_output):
-      kmph_speed = fn_args['speed'] * 1.61
+   def log_metric_speed(context, fn_args, fn_kwargs, fn_output):
+      kmph_speed = fn_kwargs['speed'] * 1.61
       print(f"The car is moving at {kmph_speed} kmph")
 
    c = Car()
@@ -157,7 +157,7 @@ and then tap into the hook
    )
 
    # 4. Hook is automatically triggered
-   c.move(10)
+   c.move(speed=10)
 
    >>> "The car is moving at 16.1 kmph"
 

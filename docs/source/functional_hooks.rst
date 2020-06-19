@@ -26,7 +26,7 @@ Usage on Class Instance methods
    c = Car()
    c.hooks[Car.HOOK_ON_MOVE].tap(
       'log_metric_speed',
-      lambda fn_args, fn_output, context: ...,
+      lambda context, fn_args, fn_kwargs, fn_output: ...,
       before=False
    )
 
@@ -38,7 +38,7 @@ the :class:`HookableMixin` class. This is necessary because when the ``Car`` cla
 goes through all the marked methods and constructs a :class:`FunctionalHook`` for each of them.
 
 These newly created hooks are stored on the ``instance.hooks`` attribute which is defined by the :class:`HookableMixin`
-class
+class. ``instance.hooks`` is a super class of a dict :class:`HookMapping`
 
 Arguments passed to callables from a :class:`FunctionalHook` are predefined unlike :class:`Hook` (inline hook).
 Refer to the documentation below to understand the arguments

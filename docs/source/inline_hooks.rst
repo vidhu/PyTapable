@@ -18,8 +18,8 @@ Inline
    my_hook = Hook()
 
    # 2. Define a function to execute when hook triggers
-   def my_callback(context, args, kwargs):
-      print(f"Hook says: {kwargs['greeting']}")
+   def my_callback(context, fn_args, fn_kwargs):
+      print(f"Hook says: {fn_kwargs['greeting']}")
 
    # 3. Tap into our hook
    my_hook.tap('My Tap Name', my_callback)
@@ -72,4 +72,3 @@ HookableMixin
 ^^^^^^^^^^^^^
 .. autoclass:: pytapable.HookableMixin
    :noindex:
-   :members: inherit_hooks
