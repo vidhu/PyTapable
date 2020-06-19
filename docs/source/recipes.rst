@@ -16,6 +16,6 @@ Here we wrap callbacks in statsd timers using an interceptor and log them agains
 
    class InterceptorHookTimer(HookInterceptor):
 
-       def register(self, tap):
+       def register(self, context, tap):
            tap.fn = statsd.timer(f"interceptor.${tap.name}")(tap.fn)
            return tap

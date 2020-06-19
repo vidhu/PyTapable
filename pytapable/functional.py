@@ -58,6 +58,7 @@ class FunctionalHook(BaseHook):
 
         .. code-block:: python
 
+           # Arguments to a callback
 
            fn_args: *args,
            fn_kwargs: **kwargs
