@@ -10,7 +10,8 @@ Interceptors can be thought of as hooks for your hooks.
 
    class TapLogger(HookInterceptor):
 
-       def register(self, tap):
+       def register(self, context, tap):
+           print(f"Hook being tapping is '${context['hook']}'")
            print(f"Hook being tapped by '${tap.name}'")
            return tap
 

@@ -11,8 +11,8 @@ TAP_NAME = 'my_tap'
 
 class CarHookInterceptor(HookInterceptor):
 
-    def register(self, tap):
-        pass
+    def register(self, context, tap):
+        return tap
 
 
 interceptor = CarHookInterceptor()
@@ -27,6 +27,23 @@ class Car(HookableMixin):
 
 class HookInterceptorTests(TestCase):
 
+    def test_interceptor_no_tap_modification(self):
+        my_hook = Hook(interceptor=interceptor)
+
+        with patch.object(interceptor, 'register', wraps=interceptor.register) as wrapper_register:
+            my_hook.tap(TAP_NAME, lambda: None)
+
+        assert wrapper_register.called
+
+        # Assert Tap
+        tap = wrapper_register.call_args_list[0][1]['tap']
+        assert tap == my_hook.taps[0]
+
+        # Assert Context
+        context = wrapper_register.call_args_list[0][1]['context']
+        assert context['hook'] == my_hook
+
+
     def test_register_functional(self):
         c = Car()
 
@@ -36,11 +53,17 @@ class HookInterceptorTests(TestCase):
 
         assert mock_register.called
 
-        tap = mock_register.call_args_list[0][0][0]
+        # Assert Tap properties in .register()
+        tap = mock_register.call_args_list[0][1]['tap']
         assert isinstance(tap, Tap)
         assert tap.name == TAP_NAME
         assert isinstance(tap.fn, FunctionType)
 
+        # Assert Context
+        context = mock_register.call_args_list[0][1]['context']
+        assert context['hook'] == c.hooks[HOOK_MOVE]
+
+        # Assert Tap return
         assert c.hooks[HOOK_MOVE].taps[0] == modified_tap
 
     def test_register_inline(self):
@@ -52,11 +75,18 @@ class HookInterceptorTests(TestCase):
             my_hook.tap(TAP_NAME, lambda: None)
 
         assert mock_register.called
-        tap = mock_register.call_args_list[0][0][0]
+
+        # Assert Tap properties in .register()
+        tap = mock_register.call_args_list[0][1]['tap']
         assert isinstance(tap, Tap)
         assert tap.name == TAP_NAME
         assert isinstance(tap.fn, FunctionType)
 
+        # Assert Context
+        context = mock_register.call_args_list[0][1]['context']
+        assert context['hook'] == my_hook
+
+        # Assert Tap return
         assert my_hook.taps[0] == modified_tap
 
 
