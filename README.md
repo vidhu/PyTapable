@@ -118,8 +118,8 @@ class Car(HookableMixin):
  Generating a unique name is not required but becomes important when inheriting hooks from other Classes.
 
 ```python
-def callback(context, fn_args, fn_output):
-    kmph_speed = fn_args['speed'] * 1.61
+def callback(context, fn_args, fn_kwargs, fn_output):
+    kmph_speed = fn_kwargs['speed'] * 1.61
     print(f"The car is moving {kmph_speed} kmph")
 
 c = Car()

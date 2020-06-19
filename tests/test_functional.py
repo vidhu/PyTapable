@@ -52,32 +52,24 @@ class TestInstanceLevelHooks(TestCase):
 
         # Pre Call
         callback.assert_any_call(
-            fn_args={
-                'args': (c, '100pmh'),
-                'kwargs': {'reverse': True}
-            },
+            fn_args=(c, '100pmh'),
+            fn_kwargs={'reverse': True},
             fn_output=None,
             context={
-                'hook_type': BaseHook.FUNCTIONAL,
-                'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
-                'hook_name': HOOK_MOVE,
-                'tap_name': TAP_NAME,
+                'hook': c.hooks[HOOK_MOVE],
+                'tap': c.hooks[HOOK_MOVE].taps[0],
                 'is_before': True
             }
         )
 
         # Post Call
         callback.assert_any_call(
-            fn_args={
-                'args': (c, '100pmh'),
-                'kwargs': {'reverse': True}
-            },
+            fn_args=(c, '100pmh'),
+            fn_kwargs={'reverse': True},
             fn_output="MOVING",
             context={
-                'hook_type': BaseHook.FUNCTIONAL,
-                'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
-                'hook_name': HOOK_MOVE,
-                'tap_name': TAP_NAME,
+                'hook': c.hooks[HOOK_MOVE],
+                'tap': c.hooks[HOOK_MOVE].taps[0],
                 'is_before': False
             }
         )
@@ -93,16 +85,12 @@ class TestInstanceLevelHooks(TestCase):
 
         # Pre Call
         callback.assert_any_call(
-            fn_args={
-                'args': (c, '100pmh'),
-                'kwargs': {'reverse': True}
-            },
+            fn_args=(c, '100pmh'),
+            fn_kwargs={'reverse': True},
             fn_output=None,
             context={
-                'hook_type': BaseHook.FUNCTIONAL,
-                'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
-                'hook_name': HOOK_MOVE,
-                'tap_name': TAP_NAME,
+                'hook': c.hooks[HOOK_MOVE],
+                'tap': c.hooks[HOOK_MOVE].taps[0],
                 'is_before': True
             }
         )
@@ -118,16 +106,12 @@ class TestInstanceLevelHooks(TestCase):
 
         # Post Call
         callback.assert_any_call(
-            fn_args={
-                'args': (c, '100pmh'),
-                'kwargs': {'reverse': True}
-            },
+            fn_args=(c, '100pmh'),
+            fn_kwargs={'reverse': True},
             fn_output="MOVING",
             context={
-                'hook_type': BaseHook.FUNCTIONAL,
-                'hook_type_label': BaseHook.HOOK_TYPE_LABEL[BaseHook.FUNCTIONAL],
-                'hook_name': HOOK_MOVE,
-                'tap_name': TAP_NAME,
+                'hook': c.hooks[HOOK_MOVE],
+                'tap': c.hooks[HOOK_MOVE].taps[0],
                 'is_before': False
             }
         )

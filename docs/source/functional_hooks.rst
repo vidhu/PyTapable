@@ -26,7 +26,7 @@ Usage on Class Instance methods
    c = Car()
    c.hooks[Car.HOOK_ON_MOVE].tap(
       'log_metric_speed',
-      lambda fn_args, fn_output, context: ...,
+      lambda context, fn_args, fn_kwargs, fn_output: ...,
       before=False
    )
 

@@ -42,34 +42,37 @@ class FunctionalHook(BaseHook):
             before=before,
             after=after
         )
-        tap = self.interceptor.register(tap) if self.interceptor else tap
+        tap = self.interceptor.register(
+            context={
+                'hook': self
+            },
+            tap=tap
+        ) if self.interceptor else tap
         self.taps.append(tap)
 
-    def call(self, fn_args, is_before, fn_output=None):
+    def call(self, fn_args, fn_kwargs, is_before, fn_output=None):
         """
         Triggers all taps installed on this hook.
 
-        Taps receive predefined arguments `(fn_args, fn_output, context)`
+        Taps receive predefined arguments `(context, fn_args, fn_output)`
 
         .. code-block:: python
 
-           fn_args = {
-             "args": *args,
-             "kwargs": **kwargs
-           }
+
+           fn_args: *args,
+           fn_kwargs: **kwargs
 
            fn_output = Optional[Any]
 
            context = {
-               'hook_type': FunctionalHook.HOOK_TYPE,
-               'hook_type_label': self.label,
-               'hook_name': self.name,
-               'tap_name': tap.name,
-               'is_before': is_before
+             'hook': FunctionalHook,
+             'tap': FunctionalTap,
+             'is_before': is_before
            }
 
         Args:
-            fn_args (dict): The arguments the hooked function was called with. `fn_args: { args: Tuple, kwargs: Dict }`
+            fn_args (Tuple): The args the hooked function was called with
+            fn_kwargs (dict): The kwargs the hooked function was called with
             is_before (bool): True if the hook is being called after the hooked function has executed
             fn_output (Optional[Any]): The return value of the hooked function if any. None otherwise
         """
@@ -77,12 +80,11 @@ class FunctionalHook(BaseHook):
             if (tap.before and is_before) or (tap.after and not is_before):
                 tap.fn(
                     fn_args=fn_args,
+                    fn_kwargs=fn_kwargs,
                     fn_output=fn_output,
                     context={
-                        'hook_type': FunctionalHook.HOOK_TYPE,
-                        'hook_type_label': self.label,
-                        'hook_name': self.name,
-                        'tap_name': tap.name,
+                        'hook': self,
+                        'tap': tap,
                         'is_before': is_before
                     }
                 )
@@ -149,13 +151,12 @@ class CreateHook(object):
         @wraps(fn)
         def wrapper(*args, **kwargs):
             hook = args[0].hooks[self.name]
-            fn_args = {"args": args, "kwargs": kwargs}
 
-            hook.call(fn_args=fn_args, fn_output=None, is_before=True)
+            hook.call(fn_args=args, fn_kwargs=kwargs, fn_output=None, is_before=True)
 
             out = fn(*args, **kwargs)
 
-            hook.call(fn_args=fn_args, fn_output=out, is_before=False)
+            hook.call(fn_args=args, fn_kwargs=kwargs, fn_output=out, is_before=False)
 
             return out
 

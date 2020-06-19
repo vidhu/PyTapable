@@ -51,9 +51,7 @@ class TestInlineHooks(TestCase):
 
         # Assert args in hooks
         context = {
-            'hook_type': Hook.HOOK_TYPE,
-            'hook_type_label':  my_hook.label,
-            'hook_name': my_hook.name,
-            'tap_name': TAP_NAME
+            'hook': my_hook,
+            'tap': my_hook.taps[0]
         }
-        callback.assert_called_once_with(context=context, args=args, kwargs=kwargs)
+        callback.assert_called_once_with(context=context, fn_args=args, fn_kwargs=kwargs)
