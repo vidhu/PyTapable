@@ -1,5 +1,8 @@
+import inspect
+from inspect import FullArgSpec
 from functools import partial, wraps
 from .hooks import BaseHook, Tap, HookConfig
+from .utils import merge_args_to_kwargs
 
 
 class FunctionalTap(Tap):
@@ -50,7 +53,7 @@ class FunctionalHook(BaseHook):
         ) if self.interceptor else tap
         self.taps.append(tap)
 
-    def call(self, fn_args, fn_kwargs, is_before, fn_output=None):
+    def call(self, fn_kwargs, is_before, fn_output=None):
         """
         Triggers all taps installed on this hook.
 
@@ -72,22 +75,21 @@ class FunctionalHook(BaseHook):
            }
 
         Args:
-            fn_args (Tuple): The args the hooked function was called with
-            fn_kwargs (dict): The kwargs the hooked function was called with
+            fn_kwargs (dict): The kwargs the hooked function was called with. *args should be converted to **kwargs.
+                See `utils.merge_args_to_kwargs`
             is_before (bool): True if the hook is being called after the hooked function has executed
             fn_output (Optional[Any]): The return value of the hooked function if any. None otherwise
         """
         for tap in self.taps:
             if (tap.before and is_before) or (tap.after and not is_before):
                 tap.fn(
-                    fn_args=fn_args,
-                    fn_kwargs=fn_kwargs,
-                    fn_output=fn_output,
                     context={
                         'hook': self,
                         'tap': tap,
                         'is_before': is_before
-                    }
+                    },
+                    fn_output=fn_output,
+                    fn_kwargs=fn_kwargs,
                 )
 
 
@@ -142,22 +144,37 @@ class CreateHook(object):
 
     .. note::
         This decorator doesn't actually create the hook. It just annotates the method. The hooks are created by the
-        :class:`HookableMixin` when the class is instantiated
+        :class:`HookableMixin` upon instantiation
+
+    .. note::
+        The wrapped function may be called with different combinations of positional and named args which would make it
+        difficult for the callback function owner to know whether to look read values from *args or **kwargs. We
+        instead convert all positional args to named args to remove any ambiguity
+
+        See :func:`utils.merge_args_to_kwargs` for implementation details
     """
     def __init__(self, name, interceptor=None):
         self.name = name
         self.interceptor = interceptor
 
     def __call__(self, fn):
+        full_arg_spec = inspect.getfullargspec(fn)
+
         @wraps(fn)
         def wrapper(*args, **kwargs):
             hook = args[0].hooks[self.name]
 
-            hook.call(fn_args=args, fn_kwargs=kwargs, fn_output=None, is_before=True)
+            # Merge *args and **kwargs to just **kwargs
+            fn_kwargs = merge_args_to_kwargs(full_arg_spec, args, kwargs)
 
+            # Before call
+            hook.call(fn_kwargs=fn_kwargs, fn_output=None, is_before=True)
+
+            # Call wrapped funciton
             out = fn(*args, **kwargs)
 
-            hook.call(fn_args=args, fn_kwargs=kwargs, fn_output=out, is_before=False)
+            # After call
+            hook.call(fn_kwargs=fn_kwargs, fn_output=out, is_before=False)
 
             return out
 

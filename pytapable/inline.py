@@ -23,15 +23,17 @@ class Hook(BaseHook):
         ) if self.interceptor else tap
         self.taps.append(tap)
 
-    def call(self, *args, **kwargs):
+    def call(self, **kwargs):
         """
         Triggers the hook which executes all the taps with a arguments passed in args, kwargs and a context dict
+
+        .. note::
+            Only named args are supported
 
         .. code-block:: python
 
             # Arguments to a callback
 
-           "fn_args": *args,
            "fn_kwargs": **kwargs
 
            context = {
@@ -47,7 +49,6 @@ class Hook(BaseHook):
                     'hook': self,
                     'tap': tap
                 },
-                fn_args = args,
-                fn_kwargs = kwargs
+                fn_kwargs=kwargs
             )
 

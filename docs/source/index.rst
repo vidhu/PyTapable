@@ -83,7 +83,7 @@ There are two types of hooks provided in this library
  - **InlineHook:** Inline hooks are created and triggered manually. They are used in the body of functions and modules
    See :doc:`inline_hooks`
 
-The parameter your :term:`callbacks` are called with differ based on which hooks there were called
+The parameters your :term:`callbacks` are called with differ based on which hooks there were called
 from. Callbacks from a functional hook contain the function's arguments and return value (if available) whereas
 callbacks from an inline hook contain parameters defined by the caller
 
@@ -107,7 +107,7 @@ InlineHooks
    my_hook = Hook()
 
    # 2. Define a function to execute when hook triggers
-   def my_callback(context, fn_args, fn_kwargs):
+   def my_callback(context, fn_kwargs):
       print(f"Hook says: {fn_kwargs['greeting']}")
 
    # 3. Tap into our hook
@@ -142,7 +142,7 @@ and then tap into the hook
 
 .. code-block:: python
 
-   def log_metric_speed(context, fn_args, fn_kwargs, fn_output):
+   def log_metric_speed(context, fn_kwargs, fn_output):
       kmph_speed = fn_kwargs['speed'] * 1.61
       print(f"The car is moving at {kmph_speed} kmph")
 
@@ -158,6 +158,9 @@ and then tap into the hook
 
    # 4. Hook is automatically triggered
    c.move(speed=10)
+
+   # Positional args are converted to named arguments
+   c.move(10)
 
    >>> "The car is moving at 16.1 kmph"
 

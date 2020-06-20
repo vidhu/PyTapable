@@ -87,8 +87,8 @@ my_hook = Hook()
 
 As a consumer, we can tap into this hook by passing a name for our tap and a callback function
 ```python
-def my_callback(context, greeting):
-    print(f"Hook says: {greeting}")
+def my_callback(context, fn_kwargs):
+    print(f"Hook says: {fn_kwargs['greeting']}")
     
 my_hook.tap('My Tap Name', my_callback)
 ```
@@ -118,7 +118,7 @@ class Car(HookableMixin):
  Generating a unique name is not required but becomes important when inheriting hooks from other Classes.
 
 ```python
-def callback(context, fn_args, fn_kwargs, fn_output):
+def callback(context, fn_kwargs, fn_output, is_before):
     kmph_speed = fn_kwargs['speed'] * 1.61
     print(f"The car is moving {kmph_speed} kmph")
 
@@ -130,7 +130,8 @@ c.move(10)
 ```
 
  - Here we tap into the `on_move` hook which fires our callback after the `c.move` method has executed
- - The `c.move()` arguments are passed as `fn_args` to the callback and return value, if any, is passed as `fn_output`
+ - The `c.move()` arguments are passed as `fn_kargs` to the callback and return value, if any, is passed as `fn_output`
+   - All positional arguments are converted to named arguments
  - The context holds a `is_before` and `is_after` flag it signify if the callback was executed before or after `c.move()`
 
 ## :tropical_drink: Documentation

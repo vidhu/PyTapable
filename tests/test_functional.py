@@ -10,7 +10,7 @@ TAP_NAME = 'my_tap'
 class Car(HookableMixin):
 
     @CreateHook(HOOK_MOVE)
-    def move(self, *args, **kargs):
+    def move(self, speed, reverse):
         return "MOVING"
 
 
@@ -45,27 +45,25 @@ class TestInstanceLevelHooks(TestCase):
         c = self.create_instance()
         callback = self.install_tap(c)
 
-        return_val = c.move('100pmh', reverse=True)
+        return_val = c.move('100mph', reverse=True)
 
         assert return_val == 'MOVING'
         assert callback.call_count == 2  # pre and post call
 
         # Pre Call
         callback.assert_any_call(
-            fn_args=(c, '100pmh'),
-            fn_kwargs={'reverse': True},
-            fn_output=None,
             context={
                 'hook': c.hooks[HOOK_MOVE],
                 'tap': c.hooks[HOOK_MOVE].taps[0],
                 'is_before': True
-            }
+            },
+            fn_kwargs={'self': c, 'speed': '100mph', 'reverse': True},
+            fn_output=None
         )
 
         # Post Call
         callback.assert_any_call(
-            fn_args=(c, '100pmh'),
-            fn_kwargs={'reverse': True},
+            fn_kwargs={'self': c, 'speed': '100mph', 'reverse': True},
             fn_output="MOVING",
             context={
                 'hook': c.hooks[HOOK_MOVE],
@@ -78,15 +76,14 @@ class TestInstanceLevelHooks(TestCase):
         c = self.create_instance()
         callback = self.install_tap(c, after=False)
 
-        return_val = c.move('100pmh', reverse=True)
+        return_val = c.move('100mph', reverse=True)
 
         assert return_val == 'MOVING'
         assert callback.call_count == 1  # pre and post call
 
         # Pre Call
         callback.assert_any_call(
-            fn_args=(c, '100pmh'),
-            fn_kwargs={'reverse': True},
+            fn_kwargs={'self': c, 'speed': '100mph', 'reverse': True},
             fn_output=None,
             context={
                 'hook': c.hooks[HOOK_MOVE],
@@ -99,15 +96,14 @@ class TestInstanceLevelHooks(TestCase):
         c = self.create_instance()
         callback = self.install_tap(c, before=False)
 
-        return_val = c.move('100pmh', reverse=True)
+        return_val = c.move('100mph', reverse=True)
 
         assert return_val == 'MOVING'
         assert callback.call_count == 1  # post call
 
         # Post Call
         callback.assert_any_call(
-            fn_args=(c, '100pmh'),
-            fn_kwargs={'reverse': True},
+            fn_kwargs={'self': c, 'speed': '100mph', 'reverse': True},
             fn_output="MOVING",
             context={
                 'hook': c.hooks[HOOK_MOVE],
