@@ -42,6 +42,9 @@ class BaseHook(object):
         self.interceptor = interceptor
         self.taps = []
 
+        if self.interceptor:
+            self.interceptor.create(hook=self)
+
     @abstractmethod
     def tap(self, *args, **kwargs):
         pass
