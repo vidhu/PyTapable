@@ -186,3 +186,19 @@ class TestMixed(TestCase):
             'e': 'E',
             '*args': ('D',)
         }
+
+    def test_pep3102_ignore_args(self):
+        def fn(a, b, *, d):
+            pass
+
+        kwargs = merge_args_to_kwargs(
+            argspec=inspect.getfullargspec(fn),
+            args=('A', 'B', 'C1', 'C2'),
+            kwargs={'d': 'D'}
+        )
+
+        assert kwargs == {
+            'a': 'A',
+            'b': 'B',
+            'd': 'D'
+        }
