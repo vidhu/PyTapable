@@ -9,12 +9,7 @@ TAP_NAME = 'my_tap'
 
 
 class CarHookInterceptor(HookInterceptor):
-
-    def create(self, hook):
-        print(hook)
-
-    def register(self, context, tap):
-        return tap
+    pass
 
 
 interceptor = CarHookInterceptor()
@@ -91,13 +86,13 @@ class HookInterceptorTests(TestCase):
         assert my_hook.taps[0] == modified_tap
 
     def test_create_functional(self):
-        with patch.object(interceptor, 'create') as mock_create:
+        with patch.object(interceptor, 'create', wraps=interceptor.create) as mock_create:
             c = Car()
 
         mock_create.assert_called_once_with(hook=c.hooks[HOOK_MOVE])
 
     def test_create_inline(self):
-        with patch.object(interceptor, 'create') as mock_create:
+        with patch.object(interceptor, 'create', wraps=interceptor.create) as mock_create:
             my_hook = Hook(interceptor=interceptor)
 
         mock_create.assert_called_once_with(hook=my_hook)
