@@ -63,7 +63,6 @@ class FunctionalHook(BaseHook):
 
            # Arguments to a callback
 
-           fn_args: *args,
            fn_kwargs: **kwargs
 
            fn_output = Optional[Any]
@@ -75,7 +74,7 @@ class FunctionalHook(BaseHook):
            }
 
         Args:
-            fn_kwargs (dict): The kwargs the hooked function was called with. *args should be converted to **kwargs.
+            fn_kwargs (dict): The kwargs the hooked function was called with. \*args should be converted to \*\*kwargs.
                 See `utils.merge_args_to_kwargs`
             is_before (bool): True if the hook is being called after the hooked function has executed
             fn_output (Optional[Any]): The return value of the hooked function if any. None otherwise
@@ -148,7 +147,7 @@ class CreateHook(object):
 
     .. note::
         The wrapped function may be called with different combinations of positional and named args which would make it
-        difficult for the callback function owner to know whether to look read values from *args or **kwargs. We
+        difficult for the callback function owner to know whether to read values from `*args` or `**kwargs`. We
         instead convert all positional args to named args to remove any ambiguity
 
         See :func:`utils.merge_args_to_kwargs` for implementation details
