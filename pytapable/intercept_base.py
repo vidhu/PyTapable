@@ -5,6 +5,15 @@ class HookInterceptor(object):
     Interceptors allow you to intercept actions that are being performed on hooks and optionally modify it
     """
 
+    def create(self, hook):
+        """
+        Triggered when a hook has been initialized
+
+        Args:
+             hook (BaseHook): The hook that was created
+        """
+        pass
+
     def register(self, context, tap):
         """
         Triggered for each added tap and allows you to modify the tap

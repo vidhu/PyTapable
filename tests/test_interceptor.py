@@ -4,12 +4,14 @@ from .common_mock import patch
 from types import FunctionType
 from pytapable import HookableMixin, CreateHook, HookInterceptor, Tap, Hook
 
-
 HOOK_MOVE = 'move_hook_name'
 TAP_NAME = 'my_tap'
 
 
 class CarHookInterceptor(HookInterceptor):
+
+    def create(self, hook):
+        print(hook)
 
     def register(self, context, tap):
         return tap
@@ -42,7 +44,6 @@ class HookInterceptorTests(TestCase):
         # Assert Context
         context = wrapper_register.call_args_list[0][1]['context']
         assert context['hook'] == my_hook
-
 
     def test_register_functional(self):
         c = Car()
@@ -89,7 +90,15 @@ class HookInterceptorTests(TestCase):
         # Assert Tap return
         assert my_hook.taps[0] == modified_tap
 
+    def test_create_functional(self):
+        with patch.object(interceptor, 'create') as mock_create:
+            c = Car()
 
+        mock_create.assert_called_once_with(hook=c.hooks[HOOK_MOVE])
 
+    def test_create_inline(self):
+        with patch.object(interceptor, 'create') as mock_create:
+            my_hook = Hook(interceptor=interceptor)
 
+        mock_create.assert_called_once_with(hook=my_hook)
 
