@@ -45,13 +45,12 @@ class TestInlineHooks(TestCase):
         my_hook.tap(TAP_NAME, callback)
 
         # Trigger
-        args = ('hello', 'hook')
         kwargs = {'primitive': 'hi', 'complex': {'a': 1}}
-        my_hook.call(*args, **kwargs)
+        my_hook.call(**kwargs)
 
         # Assert args in hooks
         context = {
             'hook': my_hook,
             'tap': my_hook.taps[0]
         }
-        callback.assert_called_once_with(context=context, fn_args=args, fn_kwargs=kwargs)
+        callback.assert_called_once_with(context=context, fn_kwargs=kwargs)
