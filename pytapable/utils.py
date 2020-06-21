@@ -1,4 +1,11 @@
-from inspect import FullArgSpec
+import sys
+import inspect
+
+
+if sys.version_info[0] < 3:
+    get_arg_spec_py2_py3 = inspect.getargspec
+else:
+    get_arg_spec_py2_py3 = inspect.getfullargspec
 
 
 def merge_args_to_kwargs(argspec, args, kwargs):

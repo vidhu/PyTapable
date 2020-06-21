@@ -1,8 +1,8 @@
 import inspect
-from inspect import FullArgSpec
+
 from functools import partial, wraps
 from .hooks import BaseHook, Tap, HookConfig
-from .utils import merge_args_to_kwargs
+from .utils import merge_args_to_kwargs, get_arg_spec_py2_py3
 
 
 class FunctionalTap(Tap):
@@ -158,19 +158,19 @@ class CreateHook(object):
         self.interceptor = interceptor
 
     def __call__(self, fn):
-        full_arg_spec = inspect.getfullargspec(fn)
+        merge_args_to_kwargs_for_fn = partial(merge_args_to_kwargs, get_arg_spec_py2_py3(fn))
 
         @wraps(fn)
         def wrapper(*args, **kwargs):
             hook = args[0].hooks[self.name]
 
             # Merge *args and **kwargs to just **kwargs
-            fn_kwargs = merge_args_to_kwargs(full_arg_spec, args, kwargs)
+            fn_kwargs = merge_args_to_kwargs_for_fn(args, kwargs)
 
             # Before call
             hook.call(fn_kwargs=fn_kwargs, fn_output=None, is_before=True)
 
-            # Call wrapped funciton
+            # Call wrapped function
             out = fn(*args, **kwargs)
 
             # After call

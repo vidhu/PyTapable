@@ -1,8 +1,10 @@
+import sys
+
 from unittest import TestCase
+from pytapable.utils import merge_args_to_kwargs, get_arg_spec_py2_py3
 
-import inspect
-
-from pytapable.utils import merge_args_to_kwargs
+if sys.version_info[0] >= 3:
+    from .py3_test_convert_args_to_kwargs import TestMixedPy3
 
 
 class TestOnlyArgs(TestCase):
@@ -12,7 +14,7 @@ class TestOnlyArgs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(1, 2),
             kwargs={}
         )
@@ -27,7 +29,7 @@ class TestOnlyArgs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(1, 2),
             kwargs={}
         )
@@ -42,7 +44,7 @@ class TestOnlyArgs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=('A',),
             kwargs={}
         )
@@ -58,7 +60,7 @@ class TestOnlyArgs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(1, 2, 3, 4, 5),
             kwargs={}
         )
@@ -77,7 +79,7 @@ class TestOnlyKwargs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(),
             kwargs={'a': 1, 'b': 2}
         )
@@ -92,7 +94,7 @@ class TestOnlyKwargs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(),
             kwargs={'a': 1, 'b': 2}
         )
@@ -107,7 +109,7 @@ class TestOnlyKwargs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(),
             kwargs={'a': 1}
         )
@@ -123,7 +125,7 @@ class TestOnlyKwargs(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=(),
             kwargs={'a': 'A', 'c': 'C'}
         )
@@ -142,7 +144,7 @@ class TestMixed(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=('A',),
             kwargs={'b': 'B', 'c': 'C'}
         )
@@ -158,7 +160,7 @@ class TestMixed(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=('A',),
             kwargs={'c': 'C'}
         )
@@ -174,7 +176,7 @@ class TestMixed(TestCase):
             pass
 
         kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
+            argspec=get_arg_spec_py2_py3(fn),
             args=('A', 'B', 'C', 'D'),
             kwargs={'e': 'E'}
         )
@@ -185,20 +187,4 @@ class TestMixed(TestCase):
             'c': 'C',
             'e': 'E',
             '*args': ('D',)
-        }
-
-    def test_pep3102_ignore_args(self):
-        def fn(a, b, *, d):
-            pass
-
-        kwargs = merge_args_to_kwargs(
-            argspec=inspect.getfullargspec(fn),
-            args=('A', 'B', 'C1', 'C2'),
-            kwargs={'d': 'D'}
-        )
-
-        assert kwargs == {
-            'a': 'A',
-            'b': 'B',
-            'd': 'D'
         }
