@@ -21,6 +21,10 @@ Interceptors can be thought of as hooks for your hooks.
    tap_logger = TapLogger()
 
    my_hook = Hook(interceptor=tap_logger)
+
+   >>> Hook XYZ initialized
+
+
    my_hook.tap('My Tap', my_callback)
 
    >>> Hook being tapped by 'My Tap'
