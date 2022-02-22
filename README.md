@@ -17,6 +17,8 @@ A Library to Implement Hookable Interfaces
   <a href="https://pypi.org/project/PyTapable/">
     <img src="https://img.shields.io/pypi/v/PyTapable?style=for-the-badge" alt="pypi" />
   </a>
+ 
+  <img src="https://img.shields.io/badge/Tests-passing-green?style=for-the-badge"/>
   
   <!-- CodeCov -->
   <a href="https://codecov.io/gh/vidhu/pytapable">
@@ -30,7 +32,7 @@ A Library to Implement Hookable Interfaces
   
   <!-- Maintainability / Code Quality -->
   <a href="https://codeclimate.com/github/vidhu/PyTapable/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/f26988bb91b39a67c08e/maintainability" />
+    <img src="https://img.shields.io/badge/Maintainability-NA-green?style=for-the-badge" />
   </a>
   
   <!-- Downloads a day -->
