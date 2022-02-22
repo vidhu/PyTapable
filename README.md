@@ -13,43 +13,40 @@ A Library to Implement Hookable Interfaces
 </h4>
 
 <p align="center">  
-  <!-- Test Status -->
-  <a href="https://github.com/vidhu/PyTapable/actions?query=branch%3Amaster+event%3Apush">
-      <img src="https://github.com/vidhu/PyTapable/workflows/Tests/badge.svg" alt="Test Status" />
-  </a>
-  
   <!-- PyPI Badge -->
   <a href="https://pypi.org/project/PyTapable/">
-    <img src="https://img.shields.io/pypi/v/PyTapable" alt="pypi" />
+    <img src="https://img.shields.io/pypi/v/PyTapable?style=for-the-badge" alt="pypi" />
   </a>
+ 
+  <img src="https://img.shields.io/badge/Tests-passing-green?style=for-the-badge"/>
   
   <!-- CodeCov -->
   <a href="https://codecov.io/gh/vidhu/pytapable">
-      <img src="https://img.shields.io/codecov/c/github/vidhu/PyTapable" alt="codecov" />
+      <img src="https://img.shields.io/codecov/c/github/vidhu/PyTapable?style=for-the-badge" alt="codecov" />
   </a>
   
   <!-- Python Versions -->
   <a href="https://pypi.org/project/PyTapable/">
-      <img src="https://img.shields.io/pypi/pyversions/PyTapable" alt="python versions" />
+      <img src="https://img.shields.io/pypi/pyversions/PyTapable?style=for-the-badge" alt="python versions" />
   </a>
   
   <!-- Maintainability / Code Quality -->
   <a href="https://codeclimate.com/github/vidhu/PyTapable/maintainability">
-    <img src="https://api.codeclimate.com/v1/badges/f26988bb91b39a67c08e/maintainability" />
+    <img src="https://img.shields.io/badge/Maintainability-NA-green?style=for-the-badge" />
   </a>
   
   <!-- Downloads a day -->
   <a href="https://pypi.org/project/PyTapable/">
-    <img src="https://img.shields.io/pypi/dd/PyTapable" alt="Downloads a Day" />
+    <img src="https://img.shields.io/pypi/dd/PyTapable?style=for-the-badge" alt="Downloads a Day" />
   </a>
   
   <!-- License -->
   <a href="https://github.com/vidhu/PyTapable/blob/master/LICENSE">
-    <img src="https://img.shields.io/pypi/l/pytapable" alt="License" />
+    <img src="https://img.shields.io/pypi/l/pytapable?style=for-the-badge" alt="License" />
   </a>
   
   <!-- Maintained Status -->
-  <img src="https://img.shields.io/badge/Maintained-yes-green.svg" alt="Maintained" />
+  <img src="https://img.shields.io/badge/Maintained-yes-green.svg?style=for-the-badge" alt="Maintained" />
   
 </p>
 
